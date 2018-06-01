@@ -1,0 +1,27 @@
+#!/bin/bash
+
+. ~/.config/i3blocks/cores.conf
+
+titulo=$(xdotool getactivewindow getwindowname 2>/dev/null || echo "Arch Linux")
+tamanho=$(xdotool getactivewindow getwindowname 2>/dev/null | wc -c)
+max=35
+truncado=$(echo $titulo | ${HOME}/bin/strcut.py)
+
+if [[ $BLOCK_BUTTON -eq 1 ]]; then
+    xdotool getactivewindow getwindowname 2>/dev/null | xclip -rmlastnl -selection c
+elif [[ $BLOCK_BUTTON -eq 2 ]]; then
+	focused_window_id=$(xdotool getwindowfocus)
+	active_window_id=$(xdotool getactivewindow)
+	active_window_pid=$(xdotool getwindowpid "$active_window_id")
+	kill -9 $active_window_pid
+fi
+
+if [ "$tamanho" -gt "$max" ];then
+	echo "$truncado"
+	echo "$truncado"
+	echo ""
+else
+	echo "$titulo"
+	echo "$titulo"
+	echo ""
+fi

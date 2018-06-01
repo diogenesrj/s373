@@ -1,0 +1,27 @@
+#!/bin/bash
+
+. ~/.config/i3blocks/cores.conf
+
+default="/home/lucas/img/wallpapers"
+wallp="/home/lucas/img/wallpapers/i3wm"
+
+if [[ ${BLOCK_BUTTON} -eq 1 ]]; then
+	for i in "${default}/*"; do
+		w+=$(printf '%s\n' "$i")
+	done
+	opt=$(yad --title="i3 Wallpaper" --width="350" --height="220" --separator="" --list --column "Selecione o diretório..." --search-column 1 $w)
+	if [[ ! -z $opt ]]; then
+		sed -i "s|^\(wallp=\).*|\1\"${opt}\"|" ${HOME}/.config/i3blocks/scripts/wallpaper
+		~/bin/wallpaper.sh "$opt"
+	fi
+elif [[ ${BLOCK_BUTTON} -eq 4 ]] || [[ ${BLOCK_BUTTON} -eq 5 ]]; then
+	~/bin/wallpaper.sh "$wallp"
+elif [[ ${BLOCK_BUTTON} -eq 2 ]]; then
+	~/bin/wallpaper.sh -d
+elif [[ ${BLOCK_BUTTON} -eq 3 ]]; then
+	~/bin/wallpaper.sh -c
+fi
+
+echo ""
+echo ""
+echo ""

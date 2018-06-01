@@ -1,0 +1,46 @@
+#!/bin/bash
+
+. ~/.config/i3blocks/cores.conf
+
+i3blocks_path="${HOME}/.config/i3blocks"
+i3blocks_config="${HOME}/.config/i3blocks/config"
+
+for a in ${i3blocks_config}.*; do 
+	perfis+=($(basename $a))
+done
+
+total=$((${#perfis[@]}-1))
+
+function switchi3 {
+	linkatual=$(basename $(readlink -f $i3blocks_config))
+
+	if [[ " ${perfis[*]} " != *" $linkatual "* ]]; then
+	    rm ${i3blocks_config}
+	    ln -sf "${i3blocks_path}/${perfis[0]}" ${i3blocks_config}
+	else
+		for i in "${!perfis[@]}"; do
+	   		if [[ "${perfis[$i]}" = "${linkatual}" ]]; then
+	   			if [ $i = $total ]; then
+		   			atual=0
+		   		else
+					atual=$(($i+1))
+		   		fi
+	   		fi
+		done
+
+		ln -sf "${i3blocks_path}/${perfis[$atual]}" "${i3blocks_config}"
+		i3-msg restart
+	fi
+
+	echo ""
+	echo ""
+	echo "$cor"	
+}
+
+case $BLOCK_BUTTON in
+	1) switchi3 ;;
+esac
+
+echo ""
+echo ""
+echo "$cor"

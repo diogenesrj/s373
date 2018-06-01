@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ ! $1 ]; then
+	caminho="${HOME}/github/majestic"
+else
+	caminho="$@"
+fi
+
+cd $caminho
+
+status=$(git add . -n)
+if [ ! -z "$status" ]; then
+	c=$(echo $(git add . -n | tr '\r\n' ' '))
+	m="Autocommit por Gig Cron: alterações: $c"
+	git add .
+	git commit -m "$m"
+	git push
+fi

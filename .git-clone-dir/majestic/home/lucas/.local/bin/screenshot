@@ -1,0 +1,45 @@
+#!/bin/sh
+
+if [ -f ~/.config/user-dirs.dirs ]; then 
+	source ~/.config/user-dirs.dirs
+	dir="${XDG_PICTURES_DIR}/shots/"
+else
+	dir="${HOME}/img/shots/"
+fi
+
+
+app="maim -u"
+data=$(date +%Y-%m-%d_%H-%M-%S)
+nome="ss-${data}"
+extensao=".png"
+atraso=10
+icone="/usr/share/icons/Arc/devices/24@2x/video-display.png"
+tipo="image/png"
+lixeira="${HOME}/.local/share/Trash"
+
+[ ! -d $dir ] && mkdir -p $dir
+[ ! -d $lixeira ] && mkdir -p $lixeira
+
+if [ $1 ]; then
+	icone="/usr/share/icons/Arc/places/24@2x/user-trash.png"
+	listagem=(${dir}*)
+	if [ ${#listagem[@]} -gt 0 ]; then 
+		mv ${dir}* ${lixeira}/files/
+		msg="Pasta de screenshots limpa!"
+	else
+		msg="Pasta de screenshots já está vazia!"
+	fi
+else
+	arquivo="${nome}${extensao}"
+	$app ${arquivo}
+	msg="A screenshot <b>$arquivo</b> salva em <b>$dir</b>..."
+fi
+
+if [ ! -z $arquivo ]; then
+	if [ $(pwd) != $dir ]; then
+		mv $arquivo $dir
+	fi
+	xclip -selection c -t $tipo -i $dir$arquivo
+fi
+
+notify-send -i $icone "ScreenShot" "$msg"

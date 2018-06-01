@@ -1,0 +1,152 @@
+# Cores
+# vermelho=#d54e53
+# laranja=#e78c45
+# amarelo=#e7c547
+# verde=#b9ca4a
+# ciano=#458588
+# azul=#7aa6da
+# rosa=#c397d8
+# marrom=#928374
+
+#border=#d54e53
+#border=#e78c45
+#border=#e7c547
+#border=#b9ca4a
+#border=#458588
+#border=#7aa6da
+#border=#c397d8
+#border=#928374
+
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
+separator=false
+separator_block_width=10
+border_top=0
+border_left=0
+border_right=0
+border_bottom=2
+
+[focus]
+label=
+interval=1
+border=#d54e53
+
+[firefox]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec firefox &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall firefox; fi'
+interval=once
+border=#e78c45
+
+[thunar]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec thunar &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall thunar; fi'
+interval=once
+border=#e7c547
+
+[termite]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec termite &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall termite; fi'
+interval=once
+border=#b9ca4a
+
+[atom]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec atom &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall atom; fi'
+interval=once
+border=#458588
+
+[telegram]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec ~/.local/share/TelegramDesktop/Telegram &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall Telegram; fi'
+interval=once
+border=#7aa6da
+
+[whatsapp]
+command=bash -c 'echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then i3-msg exec Whatsapp &> /dev/null; elif [ "$BLOCK_BUTTON" -gt 1 ]; then killall Whatsapp; fi'
+interval=once
+border=#c397d8
+
+[mpd]
+label=
+interval=5
+border=#928374
+
+[dollar]
+label=
+interval=300
+border=#d54e53
+
+[btc]
+label=
+interval=60
+instance=mercadobitcoin
+border=#e78c45
+
+[wifi]
+label=
+interval=10
+border=#e7c547
+
+[cpu]
+label=
+interval=1
+border=#b9ca4a
+
+[mem]
+label=
+interval=1
+border=#458588
+
+[disk]
+label=
+interval=30
+border=#7aa6da
+
+[temperature]
+label=
+interval=10
+border=#c397d8
+
+[weather]
+instance="SAM|BR|BR010|CAMPO+GRANDE"
+interval=300
+border=#928374
+
+[packages]
+label=
+interval=600
+border=#d54e53
+
+[trash]
+label=
+interval=30
+border=#e78c45
+
+[volume]
+instance=Master
+interval=1
+signal=10
+border=#e7c547
+
+[hora]
+label=
+interval=5
+border=#b9ca4a
+
+[launcher]
+command=bash -c 'echo "  "; echo "  "; echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then bash ~/.config/rofi/scripts/drun &> /dev/null; elif [ "$BLOCK_BUTTON" == 2 ]; then bash ~/.config/rofi/scripts/janelas &> /dev/null; elif [ "$BLOCK_BUTTON" == 3 ]; then bash ~/.config/rofi/scripts/run &> /dev/null; fi'
+interval=once
+border=#458588
+
+[i3blockstheme]
+interval=once
+border=#7aa6da
+
+[screenshot]
+command=bash -c 'echo "  "; echo "  "; echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then bash ~/.config/rofi/scripts/screenshot &> /dev/null; fi'
+interval=once
+border=#c397d8
+
+[wallpaper]
+interval=once
+border=#928374
+
+[shutdown]
+command=bash -c 'echo "  "; echo "  "; echo ""; if [ "$BLOCK_BUTTON" == 1 ]; then bash ~/.config/rofi/scripts/power &> /dev/null; fi'
+interval=once
+border=#d54e53
+

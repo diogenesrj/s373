@@ -1,0 +1,34 @@
+#!/bin/bash
+
+. ~/.config/i3blocks/cores.conf
+
+PACKAGE_COUNT=$(checkupdates | wc -l)
+
+# Left click
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+    if [[ ${PACKAGE_COUNT} -gt 0 ]]; then
+		i3-sensible-terminal -e 'pacaur -Syu'
+	else
+		notify-send "Aviso" "Nenhum pacote para atualizar!"
+	fi
+# Middle click
+elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
+    pamac-updater
+# Right click
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+	pamac-manager
+fi
+
+if [[ ${PACKAGE_COUNT} -gt 50 ]]; then
+	cor=$vermelho
+elif [[ ${PACKAGE_COUNT} -gt 20 ]]; then
+	cor=$amarelo
+elif [[ ${PACKAGE_COUNT} -gt 10 ]]; then
+	cor=$verde
+else
+	cor=''
+fi
+
+echo "${PACKAGE_COUNT}" # full-text
+echo "${PACKAGE_COUNT}" # short-text
+echo "$cor"
